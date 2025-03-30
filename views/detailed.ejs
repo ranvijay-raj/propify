@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/profileedit.css">
+    <link rel="stylesheet" href="/stylesheets/detailed.css">
+    <title>Property details</title>
+</head>
+<body>
+    <nav>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" onclick="window.location.href='<%= location %>'" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
+        <label><strong>Property details</strong></label>
+        <div class="function">
+          <svg xmlns="http://www.w3.org/2000/svg" data-objectid="<%= property._id %>" width="20" height="20" fill="currentColor" <% if(user && user.wishlist.includes(property._id)){ %> style="color: red; margin-left: 3vw;" <% }else{ %> style="margin-left: 3vw;" <% } %> class="bi bi-heart-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+            </svg>
+        </div>
+    </nav>
+    <div class="gallery" onclick="window.location.href= '/media?i=<%= property._id %>'">
+        <% if(property.media.length == 2 || property.media.length > 2){ %> 
+             <% for(let i = 1;i > -1; i--){ %>
+                <% if(property.media[i].includes("jpg") || property.media[i].includes("jpeg") || property.media[i].includes("png")){ %>
+                  <% if(i == 0 && property.media.length > 2){ %>
+                    <div class="moreAvailable">
+                      <img src="<%= property.media[i] %>">
+                      <h3>+<%= property.media.length - 1 %></h3>
+                    </div>
+                  <% }else{ %>
+                    <div>
+                      <img src="<%= property.media[i] %>">
+                    </div>
+                  <% } %>
+                  <% }else{ %>
+                    <% if(i == 0 && property.media.length > 2){ %>
+                      <div class="moreAvailable">
+                        <video muted autoplay>
+                          <source src="<%= property.media[i] %>" type="video/mp4">
+                        </video>
+                        <h3><%= property.media.length - 1 %></h3>
+                      </div>
+                    <% }else{ %>
+                      <div>
+                        <video muted autoplay>
+                          <source src="<%= property.media[i] %>" type="video/mp4">
+                        </video>
+                      </div>
+                    <% } %>
+                  <% } %>
+            <% } %>
+        <% }else{ %>
+            <% property.media.forEach((media)=>{ %>
+                <% if(media.includes("jpg") || media.includes("jpeg") || media.includes("png")){ %>
+                    <img src="<%= media %>">
+                <% }else{ %>
+                  <video autoplay muted loop>
+                    <source src="<%= media %>" type="video/mp4">
+                  </video>
+                <% } %>
+              <% }) %>
+        <% } %>
+    </div>
+    <div class="rest">
+        <form action="/liked" method="post" id="hiddenform" style="display: none;">
+            <input type="text" name="id" id="hiddenid">
+            <input type="text" name="url" id="hiddenurl">
+            <input type="text" name="hiddenlocation" id="hiddenlocation">
+        </form>
+        <div class="owner">
+          <h2 style="color: navy; text-transform: capitalize;display: flex;justify-content: center;align-items: center;gap: 0.5vw;" onclick="location.href='/profile/<%= property.owner._id %>'"><img src="<%= property.owner.dp %>" height="30" width="30" style="border-radius: 50%;"> <%= property.owner.fullName %></h2>
+          <button class="view" onclick="viewNumber('<%= property.owner.mobile %>', 'true', '<%= property._id %>')">view number</button>
+        </div>
+        <br>
+        <br>
+        <div><h2 style="font-family: 'Roboto', sans-serif;font-weight: normal;"><%= property.title %></h2><div class="svg" style="height: auto; width: auto;"><svg xmlns="http://www.w3.org/2000/svg" data-objectid="<%= property._id %>" width="26" height="26" fill="currentColor" <% if(user && user.wishlist.includes(property._id)){ %> style="color: red; margin-left: 3vw;" <% }else{ %> style="margin-left: 3vw;" <% } %> class="bi bi-heart-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+          </svg></div></div>
+        <br>
+        <br>
+        <h2 class="section-title">General</h2>
+        <br>
+        <div class="sections">
+          <div>
+            <% if(property.status == "RENT"){ %>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
+              </svg>
+            <% }else{ %>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-receipt-cutoff" viewBox="0 0 16 16">
+                <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5M11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z"/>
+                <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118z"/>
+              </svg>
+            <% } %>
+            <h3><%= property.status %></h3>
+          </div>
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+              <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+            </svg>
+            <% if (property.price > 10000000 || property.price == 10000000) { %>
+              <h3>₹<%= (property.price / 10000000).toFixed(2) %>cr.</h2>
+            <% } else if (property.price > 100000 || property.price == 100000) { %>
+              <h3>₹<%= (property.price / 100000).toFixed(2) %>lac.</h2>
+            <% } else { %>
+              <h3>₹<%= property.price %></h2>
+            <% } %>
+          </div>
+          <div>
+            <img src="/images/location-pin.png" height="24" width="24">
+            <h3><%= property.area %> <%= property.areaUnit %></h3>
+          </div>
+        </div>
+        <br>
+        <br>
+        <% if(property.type !== "PLOT/LAND"){ %>
+          <h2 class="section-title">Inclusions</h2>
+        <br>
+        <div class="sections">
+          <div>
+            <img src="/images/kitchen.png" height="24" width="24">
+            <h3><%= property.inclusions[0].kitchen %> Kitchen</h3>
+          </div>
+          <div>
+            <img src="/images/bathroom.png" height="24" width="24">
+            <h3><%= property.inclusions[0].bathroom %> Bathroom</h3>
+          </div>
+          <div>
+            <img src="/images/bedroom.png" height="24" width="24">
+            <h3><%= property.inclusions[0].bedroom %> Bedroom</h3>
+          </div>
+          <% if(property.type == "APARTMENT"){ %>
+            <div>
+              <img src="/images/elevator.png" height="24" width="24">
+              <h3><%= property.inclusions[0].floors %> Floors</h3>
+            </div>
+          <% } %>
+        </div>
+        <br>
+        <br>
+        <% } %>
+        <h2 class="section-title">Location</h2>
+        <br>
+        <div class="sections">
+          <div>
+            <h3 style="color: black;">State -</h3>
+            <h3><%= property.state %></h3>
+          </div>
+          <div>
+            <h3 style="color: black;">City -</h3>
+            <h3><%= property.city %></h3>
+          </div>
+          <div>
+            <h3 style="color: black;">Pincode -</h3>
+            <h3><%= property.pincode %></h3>
+          </div>
+          <div>
+            <h3 style="color: black;">Address -</h3>
+            <h3><%= property.address %></h3>
+          </div>
+        </div>
+        <br>
+        <br>
+        <h2 class="section-title">Description</h2>
+        <br>
+          <div style="font-family: 'Open Sans', sans-serif; margin: 0;">
+            <%= property.description %>
+          </div>
+        <% if(elite == "true"){ %>
+          <br>
+          <br>
+        <h3>Peoples Contacted -</h3>
+        <div class="contacted">
+          <% property.contacted.forEach((contact)=>{ %>
+            <div>
+              <h3 style="color: navy;text-transform: capitalize;display: flex;justify-content: center;align-items: center;gap: 0.5vw;"><img src="<%= contact.dp %>" height="30" width="30" style="border-radius: 50%;"> <%= contact.fullName %></h3>
+              <button class="view" onclick="viewNumber('<%= contact.mobile %>', 'false', 'no')">View Number</button>
+            </div>
+          <% }) %>
+        </div>
+        <% } %>
+        <div id="pop">
+          <div id="popup">
+            <div style="width: 100%;display: flex;justify-content: flex-end;align-items: center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+              </svg>
+            </div>
+            <h3>Number-</h3>
+            <h3 id="numberShwon"></h3>
+          </div>
+        </div>
+    </div>
+    <% if(user){ %>
+    <script>
+    let svg = document.getElementsByClassName("svg")[0]
+    let hiddenform = document.getElementById("hiddenform")
+    let hiddenid = document.getElementById("hiddenid")
+    let hiddenurl = document.getElementById("hiddenurl")
+    let hiddenlocation = document.getElementById("hiddenlocation")
+    let view = document.getElementsByClassName("view")
+    svg.addEventListener("click", (e)=>{
+    hiddenid.value = e.currentTarget.firstElementChild.dataset.objectid
+    hiddenurl.value = window.location.href
+    hiddenlocation.value = "<%= location %>"
+    if(e.currentTarget.style.color !== "red"){
+      e.currentTarget.style.color = "red"
+    }else{
+      e.currentTarget.style.color = "white"
+    }
+    hiddenform.submit()
+    })
+    let viewNumber = async (num, post, id)=>{
+      if (post == "false") {
+        document.body.style.overflow = "hidden"
+        document.getElementById("pop").style.display = "flex" 
+        document.getElementById("numberShwon").innerHTML = num       
+      } else{
+        const response = await fetch("/contacted", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id
+      }),
+    })
+    const result = await response.json();
+    document.body.style.overflow = "hidden"
+        document.getElementById("pop").style.display = "flex" 
+        document.getElementById("numberShwon").innerHTML = num 
+        }
+      }
+    function close(){
+        document.body.style.overflow = "scroll"
+        document.getElementById("pop").style.display = "none"
+      }
+      document.querySelector("#popup svg").addEventListener("click", close)
+    </script>
+    <% }else{ %>
+      <script>
+        async function viewNumber(num, post, id){
+        if (post == "false") {
+          document.body.style.overflow = "hidden"
+          document.getElementById("pop").style.display = "flex" 
+          document.getElementById("numberShwon").innerHTML = num       
+        }
+        }
+        function close(){
+        document.body.style.overflow = "scroll"
+        document.getElementById("pop").style.display = "none"
+      }
+      document.querySelector("#popup svg").addEventListener("click", close)
+      </script>
+    <% } %>
+    <script>
+      let functions = document.getElementsByClassName("function")[0]
+      let svgC = document.getElementsByClassName("svg")[0]
+      functions.firstElementChild.nextElementSibling.addEventListener("click", (e)=>{
+        svgC.click()
+      })
+    </script>
+</body>
+</html>

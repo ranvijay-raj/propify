@@ -1,0 +1,38 @@
+body{
+    background-color: black;
+    color: white;
+}
+.swiper {
+    width: 100%;
+    height: calc(100vh - 3vw);
+  }
+
+  .swiper-slide {
+    text-align: center;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img, .swiper-slide video{
+    display: block;
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper {
+    margin-left: auto;
+    margin-right: auto;
+  }
+@media only screen and (max-width: 800px){
+    .swiper {
+        height: calc(100vh - 13vw);
+      }
+      .swiper-slide img, .swiper-slide video{
+        width: 100%;
+        height: auto;
+      }
+}

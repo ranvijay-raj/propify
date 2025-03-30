@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/search.css">
+  <title>Propify- Search your property</title>
+</head>
+<body class="flex" bgcolor="#dadada">
+  <div id="parentSearch">
+    <div id="text" class="flex">
+      <h1>Explore</h1>
+      <p>Instantly Search For Properties in Your Area</p>
+    </div>
+  <div id="search" class="flex">
+    <input type="text" placeholder="Search For Properties" style="border-radius: 1vw;" id="searchBtn">
+  </div>
+  <div id="searchFor" class="flex">
+    <div class="flex typeContainer">
+      <label style="align-self: flex-start; margin-left: 10%;margin-bottom: 2vw;">Searching For:</label>
+      <div class="flex" style="height: auto; width: 100%; justify-content: space-around;">
+        <div class="type type1 flex"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-person-fill" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+          </svg>Person</div>
+        <div class="type type1 flex property"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-building" viewBox="0 0 16 16">
+            <path
+              d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
+            <path
+              d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z" />
+          </svg>Property</div>
+      </div>
+    </div>
+    <div class="typeContainer hide">
+      <label style="align-self: flex-start; margin-left: 10%;margin-bottom: 2vw;">Type of Property</label>
+      <div class="flex" style="height: auto; width: 100%; justify-content: space-around;">
+        <div class="type type2 flex" data-select="Plot/Land"><img src="\images\location-pin.png" height="16" width="16"> Plot/Land</div>
+        <div class="type type2 flex" data-select="Flat/Apartment" style="width: auto;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings-fill" viewBox="0 0 16 16">
+          <path d="M15 .5a.5.5 0 0 0-.724-.447l-8 4A.5.5 0 0 0 6 4.5v3.14L.342 9.526A.5.5 0 0 0 0 10v5.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V14h1v1.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zM2 11h1v1H2zm2 0h1v1H4zm-1 2v1H2v-1zm1 0h1v1H4zm9-10v1h-1V3zM8 5h1v1H8zm1 2v1H8V7zM8 9h1v1H8zm2 0h1v1h-1zm-1 2v1H8v-1zm1 0h1v1h-1zm3-2v1h-1V9zm-1 2h1v1h-1zm-2-4h1v1h-1zm3 0v1h-1V7zm-2-2v1h-1V5zm1 0h1v1h-1z"/>
+        </svg>Flat/Apartment</div>
+      </div>
+    </div>
+    <button id="nextBtn" disabled class="disabled">See Results</button>
+  </div>
+  </div>
+  <div class="mobileCopatable">
+    <div class="components flex"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+      <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+    </svg> Home</div>
+    <div class="components flex"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+        class="bi bi-search" viewBox="0 0 16 16">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+      </svg> Search</div>
+  </div>
+  <script src="/javascripts/search.js"></script>
+  <% if(search.length > 0){ %>
+    <script>
+      searchBtn.value = "<%= search %>"
+      if(searchBtn.value.trim().length > 3){
+        con3 = true
+    }
+    </script>
+  <% } %>
+  <% if(p.length > 0){ %>
+    <% if (p == "BUY"){ %>
+    <script>
+      type1s[1].click()
+    </script>
+    <% } else if (p == "RENT"){ %>
+      <script>
+        type1s[1].click()
+        type2s[1].click()
+      </script>
+      <% } else{ %>
+        <script>
+          type1s[1].click()
+        </script>
+        <% } %>
+  <% } %>
+</body>
+</html>

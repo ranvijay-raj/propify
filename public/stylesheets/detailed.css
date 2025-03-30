@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+nav{
+  background-color: blueviolet;
+  margin-bottom: 2vw;
+  color: white;
+  justify-content: space-between;
+}
+.function{
+  height: 100%;
+  width: 20%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  visibility: hidden;
+}
+.gallery{
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    gap: 0.5vw;
+}
+.gallery div{
+  width: 25%;
+  height: auto;
+  max-height: 40vh;
+}
+.moreAvailable{
+  position: relative;
+}
+.moreAvailable img, .moreAvailable video{
+  position: relative;
+  filter: brightness(50%);
+}
+.moreAvailable h3{
+  position: absolute;
+  font-family: "Open Sans", sans-serif;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: normal;
+  color: white;
+  font-size: 3vw;
+}
+.gallery img, .gallery video{
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+}
+.rest{
+    width: 90%;
+    height: auto;
+    margin: 1vw auto;
+}
+.rest h2{
+    font-family: "Open Sans", sans-serif;
+}
+.view{
+    padding: 1%;
+    border: none;
+    outline: none;
+    background-color: royalblue;
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+    gap: 1vw;
+  }
+  .rest div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sections div h3{
+    text-transform: capitalize;
+    font-family: "Open Sans", sans-serif;
+    font-weight: normal;
+  }
+  .sections{
+    flex-wrap: wrap;
+  }
+  .sections div{
+    flex-direction: column;
+    color: deepskyblue;
+  }
+  .sections img{
+    color: deepskyblue;
+  }
+  .contacted{
+    width: 100%;
+    height: auto;
+    font-family: "Open Sans", sans-serif;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5vw;
+  }
+  .contacted div{
+    width: 98%;
+    height: auto;
+    border: 0.1vw solid deepskyblue;
+  }
+  #pop{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 0;
+    padding: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  #popup{
+    width: 18vw;
+    height: 18vw;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+  #popup div{
+    margin: 0;
+  }
+  #numberShwon{
+    margin: auto 0;
+  }
+  .section-title{
+    font-family: "Andika", sans-serif;
+  }
+@media only screen and (max-width: 800px){
+  .gallery div{
+    width: 48%;
+    height: auto;
+  }
+  .gallery{
+      height: 30vh;
+  }
+  .sections div{
+    margin-left: 4vw;
+  }
+  .view{
+    padding: 2vw;
+    border-radius: 1.5vw;
+  }
+  .owner{
+    margin-top: 0;
+    margin-bottom: 4vw;
+  }
+  .rest div{
+    margin-bottom: 3vw;
+  }
+  .moreAvailable h3{
+    font-size: 10vw;
+  }
+  .function{
+    visibility: visible;
+  }
+  .rest .svg{
+    display: none;
+  }
+}

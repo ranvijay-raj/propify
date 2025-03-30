@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propify- User Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/result.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+</head>
+<body>
+    <nav class="flex">
+        <img src="/images/logo.png">
+        <ul class="flex">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/search">Properties</a></li>
+            <li><a href="/profile" style="color: royalblue;">Profile</a></li>
+            <li><a href="/news" style="color: red;">News</a></li>
+        </ul>
+        <label class="flex" style="justify-content: space-around; gap: 1vh;" onclick="window.location.href='/uploadProperty'"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-add" viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h4a.5.5 0 1 0 0-1h-4a.5.5 0 0 1-.5-.5V7.207l5-5 6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+            <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 1 0 1 0v-1h1a.5.5 0 1 0 0-1h-1v-1a.5.5 0 0 0-.5-.5"/>
+          </svg><b>Post Property</b></label>
+    </nav>
+    <div class="full">
+        <div class="p-details flex">
+            <div class="ulogo">
+                <img src="<%= user.dp %>">
+            </div>
+            <label><%= user.fullName %></label>
+            <label><%= user.username %></label>
+            <button class="flex" onclick="window.location.href='/edit-profile'"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+              </svg>Edit Profile</button>
+            <button class="flex" style="background-color: magenta;" onclick="suggest()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+            </svg>Give Suggestion</button>
+            <div class="tabCon flex">
+                <div class="tabsP flex">All Properties</div>
+                <div class="tabsP flex">Owned</div>
+                <div class="tabsP flex">Solds</div>
+                <div class="tabsP flex"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg></div>
+            </div>
+        </div>
+        <div class="tabWrapper">
+            <div class="tabC">
+              <% if(user.property.length > 0){ %>
+                <% user.property.forEach((property)=>{ %>
+                  <div class="resultedDiv flex border">
+                    <div class="swiper mySwiper">
+                      <div class="swiper-wrapper">
+                        <% property.media.forEach((media)=>{ %>
+                          <% if(media.includes("jpg") || media.includes("jpeg") || media.includes("png")){ %>
+                            <div class="swiper-slide">
+                            <img src="<%= media %>">
+                            </div>
+                          <% }else{ %>
+                            <div class="swiper-slide">
+                            <video controls muted>
+                              <source src="<%= media %>" type="video/mp4">
+                            </video>
+                            </div>
+                          <% } %>
+                        <% }) %>
+                      </div>
+                      <div class="swiper-button-next"></div>
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="details flex">
+                      <div class="flex" style="justify-content: space-between; width: 100%;"><h5 onclick="location.href='/profile/<%= user._id %>'" style="margin: 0 auto;"><%= user.fullName %></h5>
+                        <% if(property.new == true){ %>
+                        <div id="red"></div>
+                        <% } %>
+                      </div>
+                      <h4 style="text-transform: capitalize;"><%= property.title %></h4>
+                      <div class="flex prices border" onclick="window.location.href=`/property?id=<%= property._id %>`">
+                        <div class="price flex">
+                          <h4 style="font-weight: 500;">Price</h4>
+                          <% if (property.price > 10000000 || property.price == 10000000) { %>
+                            <h2>₹<%= (property.price / 10000000).toFixed(2) %>cr.</h2>
+                          <% } else if (property.price > 100000 || property.price == 100000) { %>
+                            <h2>₹<%= (property.price / 100000).toFixed(2) %>lac.</h2>
+                          <% } else { %>
+                            <h2>₹<%= property.price %></h2>
+                          <% } %>
+                        </div>
+                        <div class="price flex">
+                          <h4 style="font-weight: 500;">Area</h4>
+                          <h2><%= (property.area) + (property.areaUnit) %></h2>
+                        </div>
+                        <% if(property.type !== "PLOT/LAND"){ %>
+                        <div class="price flex">
+                          <h4 style="font-weight: 500;">Inclusions</h4>
+                          <h2><i class="fa-solid fa-bed"></i> <%= property.inclusions[0].bedroom %></h2>
+                          <h2><i class="fa-solid fa-kitchen-set"></i> <%= property.inclusions[0].kitchen %></h2>
+                          <h2><i class="fa-solid fa-bath"></i> <%= property.inclusions[0].bathroom %></h2>
+                        </div>
+                        <% } %>
+                      </div>
+                      <div class="contacthim flex">
+                        <button class="flex border" style="background-color: red;" onclick="sell('yes', '<%= property._id %>')">Sold</button>
+                        <button class="flex border" onclick="location.href='/editProperty/<%= property._id %>'"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                        </svg><b>Edit Property</b></button>
+                      </div>
+                    </div>
+                  </div>
+               <% }) %>
+            <% } %>
+            </div>
+            <div class="tabC">
+              <% if(user.property.length > 0){ %>
+                <% user.property.forEach((property)=>{ %>
+                  <% if(property.sold == "no"){ %>
+                  <div class="resultedDiv flex border">
+                    <div class="swiper mySwiper">
+                      <div class="swiper-wrapper">
+                        <% property.media.forEach((media)=>{ %>
+                          <% if(media.includes("jpg") || media.includes("jpeg") || media.includes("png")){ %>
+                            <div class="swiper-slide">
+                            <img src="<%= media %>">
+                            </div>
+                          <% }else{ %>
+                            <div class="swiper-slide">
+                            <video controls muted>
+                              <source src="<%= media %>" type="video/mp4">
+                            </video>
+                            </div>
+                          <% } %>
+                        <% }) %>
+                      </div>
+                      <div class="swiper-button-next"></div>
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="details flex">
+                      <h5 onclick="location.href='/profile/<%= user._id %>'"><%= user.fullName %></h5>
+                      <h4 style="text-transform: capitalize;"><%= property.title %></h4>
+                      <div class="flex prices border" onclick="window.location.href=`/property?id=<%= property._id %>`">
+                        <div class="price flex">
+                          <h4 style="font-weight: 500;">Price</h4>
+                          <% if (property.price > 10000000 || property.price == 10000000) { %>
+                            <h2>₹<%= (property.price / 10000000).toFixed(2) %>cr.</h2>
+                          <% } else if (property.price > 100000 || property.price == 100000) { %>
+                            <h2>₹<%= (property.price / 100000).toFixed(2) %>lac.</h2>
+                          <% } else { %>
+                            <h2>₹<%= property.price %></h2>
+                          <% } %>
+                        </div>
+                        <div class="price flex">
+                          <h4 style="font-weight: 500;">Area</h4>
+                          <h2><<%= (property.area) + (property.areaUnit) %></h2>
+                        </div>
+                        <% if(property.type !== "PLOT/LAND"){ %>
+                        <div class="price flex">
+                          <h4 style="font-weight: 500;">Inclusions</h4>
+                          <h2><i class="fa-solid fa-bed"></i> <%= property.inclusions[0].bedroom %></h2>
+                          <h2><i class="fa-solid fa-kitchen-set"></i> <%= property.inclusions[0].kitchen %></h2>
+                          <h2><i class="fa-solid fa-bath"></i> <%= property.inclusions[0].bathroom %></h2>
+                        </div>
+                        <% } %>
+                      </div>
+                      <div class="contacthim flex">
+                        <button class="flex border" style="background-color: red;" onclick="sell('yes', '<%= property._id %>')">Sold</button>
+                        <button class="flex border" onclick="location.href='/editProperty/<%= property._id %>'"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                        </svg><b>Edit Property</b></button>
+                      </div>
+                    </div>
+                  </div>
+                  <% } %>
+               <% }) %>
+            <% } %>
+            </div>
+            <div class="tabC"><% if(user.property.length > 0){ %>
+              <% user.property.forEach((property)=>{ %>
+                <% if(property.sold == "yes"){ %>
+                <div class="resultedDiv flex border">
+                  <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                      <% property.media.forEach((media)=>{ %>
+                        <% if(media.includes("jpg") || media.includes("jpeg") || media.includes("png")){ %>
+                          <div class="swiper-slide">
+                          <img src="<%= media %>">
+                          </div>
+                        <% }else{ %>
+                          <div class="swiper-slide">
+                          <video controls muted>
+                            <source src="<%= media %>" type="video/mp4">
+                          </video>
+                          </div>
+                        <% } %>
+                      <% }) %>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                  <div class="details flex">
+                    <h5 onclick="location.href='/profile/<%= user._id %>'"><%= user.fullName %></h5>
+                    <h4 style="text-transform: capitalize;"><%= property.title %></h4>
+                    <div class="flex prices border" onclick="window.location.href=`/property?id=<%= property._id %>`">
+                      <div class="price flex">
+                        <h4 style="font-weight: 500;">Price</h4>
+                        <% if (property.price > 10000000 || property.price == 10000000) { %>
+                          <h2>₹<%= (property.price / 10000000).toFixed(2) %>cr.</h2>
+                        <% } else if (property.price > 100000 || property.price == 100000) { %>
+                          <h2>₹<%= (property.price / 100000).toFixed(2) %>lac.</h2>
+                        <% } else { %>
+                          <h2>₹<%= property.price %></h2>
+                        <% } %>
+                      </div>
+                      <div class="price flex">
+                        <h4 style="font-weight: 500;">Area</h4>
+                        <h2><%= (property.area) + (property.areaUnit) %></h2>
+                      </div>
+                      <% if(property.type !== "PLOT/LAND"){ %>
+                      <div class="price flex">
+                        <h4 style="font-weight: 500;">Inclusions</h4>
+                        <h2><i class="fa-solid fa-bed"></i> <%= property.inclusions[0].bedroom %></h2>
+                        <h2><i class="fa-solid fa-kitchen-set"></i> <%= property.inclusions[0].kitchen %></h2>
+                        <h2><i class="fa-solid fa-bath"></i> <%= property.inclusions[0].bathroom %></h2>
+                      </div>
+                      <% } %>
+                    </div>
+                    <div class="contacthim flex">
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+             <% }) %>
+          <% } %></div>
+            <div class="tabC">
+              <form action="/liked" method="post" id="hiddenform" hidden>
+                <input type="text" name="id" id="hiddenid">
+                <input type="text" name="url" id="hiddenurl">
+              </form>
+              <% if(user.property.length > 0){ %>
+              <% user.property.forEach((property)=>{ %>
+                <% if(user.wishlist.includes(property._id)){ %>
+                <div class="resultedDiv flex border">
+                  <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                      <% property.media.forEach((media)=>{ %>
+                        <% if(media.includes("jpg") || media.includes("jpeg") || media.includes("png")){ %>
+                          <div class="swiper-slide">
+                          <img src="<%= media %>">
+                          </div>
+                        <% }else{ %>
+                          <div class="swiper-slide">
+                          <video controls muted>
+                            <source src="<%= media %>" type="video/mp4">
+                          </video>
+                          </div>
+                        <% } %>
+                      <% }) %>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                  <div class="details flex">
+                    <div class="flex" style="justify-content: center; width: 100%;"><h5 onclick="location.href='/profile/<%= user._id %>'"><%= user.fullName %></h5> <div class="svg" style="height: auto; width: auto;"><svg xmlns="http://www.w3.org/2000/svg" data-objectid="<%= property._id %>" width="26" height="26" fill="currentColor" style="color: red; margin-left: 500%;" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                      </svg></div></div>
+                    <h4 style="text-transform: capitalize;"><%= property.title %></h4>
+                    <div class="flex prices border" onclick="window.location.href=`/property?id=<%= property._id %>`">
+                      <div class="price flex">
+                        <h4 style="font-weight: 500;">Price</h4>
+                        <% if (property.price > 10000000 || property.price == 10000000) { %>
+                          <h2>₹<%= (property.price / 10000000).toFixed(2) %>cr.</h2>
+                        <% } else if (property.price > 100000 || property.price == 100000) { %>
+                          <h2>₹<%= (property.price / 100000).toFixed(2) %>lac.</h2>
+                        <% } else { %>
+                          <h2>₹<%= property.price %></h2>
+                        <% } %>
+                      </div>
+                      <div class="price flex">
+                        <h4 style="font-weight: 500;">Area</h4>
+                        <h2><%= (property.area) + (property.areaUnit) %></h2>
+                      </div>
+                      <% if(property.type !== "PLOT/LAND"){ %>
+                      <div class="price flex">
+                        <h4 style="font-weight: 500;">Inclusions</h4>
+                        <h2><i class="fa-solid fa-bed"></i> <%= property.inclusions[0].bedroom %></h2>
+                        <h2><i class="fa-solid fa-kitchen-set"></i> <%= property.inclusions[0].kitchen %></h2>
+                        <h2><i class="fa-solid fa-bath"></i> <%= property.inclusions[0].bathroom %></h2>
+                      </div>
+                      <% } %>
+                    </div>
+                    <div class="contacthim flex">
+                      <button class="flex border" onclick="window.location.href='/property?id=<%= property._id %>'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                      </svg> View Number</button>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+             <% }) %>
+          <% } %></div>
+        </div>
+    </div>
+    <div id="pop">
+      <div id="popup">
+        <div style="width: 100%;display: flex;justify-content: flex-end;align-items: center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+          </svg>
+        </div>
+        <h3>Are you confirm to your property is sold?</h3>
+        <div style="width: 100%;display: flex;justify-content: space-around;align-items: center;">
+           <button style="background-color: red;" onclick="sold()">yes</button>
+           <button style="background-color: palegreen;" onclick="sell('no', 'N.A')">no</button>
+        </div>
+      </div>
+    </div>
+    <div id="Suggest-pop">
+      <div id="Suggest-popup">
+        <div style="width: 100%;display: flex;justify-content: flex-end;align-items: center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16" onclick="SuggestClose()">
+            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+          </svg>
+        </div>
+        <h3>Provide Suggestion How Can we Improve Our Website</h3>
+        <form action="/suggest" method="post" style="height: auto;width: 100%;background-color: white; border-radius: 0%;display: flex;align-items: center;" id="SuggestForm">
+        <textarea name="suggestion" required></textarea>
+        <button type="button">Submit</button>
+        </form>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/javascripts/fix.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      let propertyId
+        var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+        let tabs = document.getElementsByClassName("tabsP")
+        let contents = document.getElementsByClassName("tabC")
+        let tabA = Array.from(tabs)
+        tabA.forEach((tab, index)=>{
+            tab.addEventListener("click", ()=>{
+                for (let i = 0; i < tabs.length; i++) {
+                    tabs[i].classList.remove("activetab")
+                    contents[i].classList.remove("visible")
+                }
+                contents[index].classList.add("visible")
+                tab.classList.add("activetab")
+            })
+        })
+        tabs[0].click()
+        let svgs = document.getElementsByClassName("svg")
+    let hiddenform = document.getElementById("hiddenform")
+    let hiddenid = document.getElementById("hiddenid")
+    let hiddenurl = document.getElementById("hiddenurl")
+    for (let i = 0; i < svgs.length; i++) {
+      svgs[i].addEventListener("click", (e)=>{
+      hiddenid.value = e.currentTarget.firstElementChild.dataset.objectid
+      hiddenurl.value = window.location.href
+        e.currentTarget.style.color = "white"
+      hiddenform.submit()
+      })
+    }
+    let sell = async (confirmation, id)=>{
+    propertyId = id
+    if (confirmation == "yes") {
+      document.body.style.overflow = "hidden"
+      document.getElementById("pop").style.display = "flex"
+    } else {
+      document.body.style.overflow = "scroll"
+      document.getElementById("pop").style.display = "none" 
+    }
+        }
+    let sold = async ()=>{
+      const response = await fetch("/sold", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: propertyId
+      }),
+    })
+    const result = await response.json();
+    location.reload()
+    }
+      function close(){
+        document.body.style.overflow = "scroll"
+        document.getElementById("pop").style.display = "none"
+      }
+      document.querySelector("#popup svg").addEventListener("click", close)
+    let SuggestPop = document.getElementById("Suggest-pop")
+    let SuggestButtonSubmit = document.querySelector("#SuggestForm button")
+    let textarea = document.querySelector("#SuggestForm textarea")
+    let SuggestForm = document.getElementById("SuggestForm")
+    let suggest = ()=>{
+      SuggestPop.style.display = "flex"
+      document.body.style.overflow = "hidden"
+    }
+    let SuggestClose = ()=>{
+      SuggestPop.style.display = "none"
+      document.body.style.overflow = "scroll"
+    }
+    SuggestButtonSubmit.addEventListener("click", ()=>{
+      if (textarea.value.length > 0) {
+        SuggestForm.submit()
+        SuggestClose()
+      }
+    })
+    </script>
+</body>
+</html>

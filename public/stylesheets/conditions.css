@@ -1,0 +1,12 @@
+.content{
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
+}
+.content ul li{
+    font-family: "Montserrat", sans-serif;
+    list-style: disc;
+    margin-bottom: 1.5vw;
+}
+.align{
+    align-items: flex-start;
+}

@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+nav{
+    margin-top: 1.5vw;
+    position: absolute;
+}
+ul{
+    justify-content: space-around;
+    width: 30%;
+    background-color: white;
+    height: 80%;
+    border-radius: 5vw;
+}
+li a{
+    text-decoration: none;
+    color: black;
+}
+li a:hover{
+    color: royalblue;
+}
+.part1{
+    background-color: white;
+}
+.part1 img{
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+    object-position: center;
+}
+.part1 h2{
+    position: absolute;
+    bottom: 40%;
+    font-size: 5em;
+    color: black;
+    left: 15%;
+}
+.part1 h4{
+    color: rgba(0, 0, 0, 0.7);
+    font-family: "Open Sans", sans-serif;
+    position: absolute;
+    left: 20%;
+    bottom: 30%;
+    font-size: large;
+}
+.resultedDiv{
+    height: 50vh;
+    width: 100%;
+    background-color: white;
+    border: 0.1vw solid silver;
+    justify-content: space-around;
+}
+.swiper {
+    width: 49%;
+    height: 95%;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+  }
+  .swiper-slide video {
+    display: block;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+  }
+  .details{
+    height: 100%;
+    width: 49%;
+    justify-content: space-around;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+  }
+  .details .prices{
+    justify-content: space-around;
+    width: 100%;
+    height: 45%;
+    background-color: white;
+    border: 0.1vw solid silver;
+    overflow-x: auto;
+  }
+  .price{
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 33%;
+    background-color: white;
+    word-wrap: break-word;
+  }
+  .price h2{
+    padding: 0;
+    margin: 0;
+  }
+  .contacthim{
+    width: 100%;
+    height: 15%;
+    justify-content: space-around;
+  }
+  .contacthim button{
+    padding: 1.5%;
+    border: none;
+    outline: none;
+    background-color: royalblue;
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+    gap: 1vw;
+    border-radius: 0.5vw;
+  }
+  #Suggest-pop, #pop{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 0;
+    padding: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 108;
+  }
+  #suggest-popup, #popup{
+    width: 18vw;
+    height: 18vw;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+  #Suggest-popup div, #popup div{
+    margin: 0;
+  }
+  #numberShwon{
+    margin: auto 0;
+  }
+@media only screen and (max-width: 800px){
+    ul{
+        width: 65%;
+    }
+    nav label b{
+        display: none;
+    }
+    .part1 h2{
+        font-size: 2em;
+        bottom: 70%;
+        left: 10%;
+    }
+    .part1 h4{
+        bottom: 65%;
+        left: 10%;
+    }
+    nav{
+        margin-top: 4.5vw;
+    }
+    .resultedDiv{
+        flex-direction: column;
+    }
+    .details{
+        width: 90%;
+    }
+    .swiper{
+        width: 100%;
+    }
+    .details .prices::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+    .prices{
+        background-color: #DDDDDD;
+        height: 60%;
+    border: 0.4vw solid silver;
+    }
+    .contacthim button{
+      padding: 2.5vw;
+      border-radius: 1.5vw;
+    }
+}

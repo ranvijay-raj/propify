@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/stylesheets/result.css">
+  <title>Propify - Property Search Results</title>
+</head>
+<body bgcolor="#dadada">
+  <nav class="flex">
+    <img src="/images/logo.png" onclick="window.location.href='/'">
+    <input type="text" class="border myInput">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle"
+      viewBox="0 0 16 16" onclick="window.location.href = '/profile'">
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+      <path fill-rule="evenodd"
+        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+    </svg>
+  </nav>
+  <div class="full flex">
+    <!-- <div id="filter"></div> -->
+    <div id="results">
+      <label id="number"> Results</label>
+      <div id="sort" class="flex border">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide flex">Oldest First</div>
+            <div class="swiper-slide flex">Newest First</div>
+            <div class="swiper-slide flex">Price High To Low</div>
+            <div class="swiper-slide flex">Price Low To High</div>
+          </div>
+        </div>
+      </div>
+      <form action="/liked" method="post" id="hiddenform" hidden>
+        <input type="text" name="id" id="hiddenid">
+        <input type="text" name="url" id="hiddenurl">
+      </form>
+      <div id="final" class="flex">
+      </div>
+      <div id="toTop" class="flex">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-arrow-up"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div id="pop">
+    <div id="popup">
+      <div style="width: 100%;display: flex;justify-content: flex-end;align-items: center;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+        </svg>
+      </div>
+      <h3>Number-</h3>
+      <h3 id="numberShwon"></h3>
+    </div>
+  </div>
+  <div class="mobileCopatable">
+    <div class="components flex"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+        class="bi bi-house-door" viewBox="0 0 16 16">
+        <path
+          d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
+      </svg> Home</div>
+    <div class="components flex"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+        class="bi bi-search" viewBox="0 0 16 16">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+      </svg> Search</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/javascripts/fix.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="/javascripts/result.js"></script>
+  <script src="/javascripts/infinitePropertyscroll.js"></script>
+  <script>
+    input.value = "<%= q %>"
+    var swiper = new Swiper("#sort .mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+    let svgs = document.getElementsByClassName("svg")
+    let hiddenform = document.getElementById("hiddenform")
+    let hiddenid = document.getElementById("hiddenid")
+    let hiddenurl = document.getElementById("hiddenurl")
+    let number = document.getElementById("number")
+    let final = document.getElementById("final")
+    let sort = document.getElementById("sort")
+    const addfunc = ()=>{
+      for (let i = 0; i < svgs.length; i++) {
+      svgs[i].addEventListener("click", (e)=>{
+        if("<%= logged %>" == "true"){
+      hiddenid.value = e.currentTarget.firstElementChild.dataset.objectid
+      hiddenurl.value = window.location.href
+      if(e.currentTarget.style.color !== "red"){
+        e.currentTarget.style.color = "red"
+      }else{
+        e.currentTarget.style.color = "white"
+      }
+      hiddenform.submit()
+    }
+      })
+    }
+    if (svgs.length == 0) {
+      number.innerHTML = document.getElementsByClassName("person").length +" Results"
+    } else {
+      number.innerHTML = svgs.length+" Results"
+    }
+}
+let sorteddiv = document.getElementById("sort")
+let filters = sorteddiv.getElementsByClassName("swiper-slide")
+for (let i = 0; i < filters.length; i++) {
+  filters[i].addEventListener("click", ()=>{
+    for (let b = 0; b < filters.length; b++) {
+      filters[b].classList.remove("filtered")
+    }
+    filters[i].classList.add("filtered")
+    final.innerHTML = ""
+    page = 1
+    fetchData(i)
+  })
+}
+  eventEmitter.addEventListener('workDone', addfunc);
+  </script>
+  <% if(logged == "true"){ %>
+    <script>
+      let viewNumber = async (num, post, id)=>{
+      if (post == "false") {
+        document.body.style.overflow = "hidden"
+        document.getElementById("pop").style.display = "flex" 
+        document.getElementById("numberShwon").innerHTML = num       
+      } else{
+        const response = await fetch("/contacted", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id
+      }),
+    })
+    const result = await response.json();
+    document.body.style.overflow = "hidden"
+        document.getElementById("pop").style.display = "flex" 
+        document.getElementById("numberShwon").innerHTML = num 
+        }
+      }
+    function close(){
+        document.body.style.overflow = "scroll"
+        document.getElementById("pop").style.display = "none"
+      }
+      document.querySelector("#popup svg").addEventListener("click", close)
+    </script>
+  <% } %>
+</body>
+</html>

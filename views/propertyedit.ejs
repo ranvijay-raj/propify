@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propify- Edit Your Property</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/home.css">
+  <link rel="stylesheet" href="/stylesheets/profile.css">
+  <link rel="stylesheet" href="/stylesheets/list.css">
+</head>
+<body>
+  <nav class="flex">
+    <img src="/images/logo.png">
+    <ul class="flex">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/search">Properties</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/news" style="color: red;">News</a></li>
+    </ul>
+    <label class="flex" style="justify-content: space-around; gap: 1vh;"><svg xmlns="http://www.w3.org/2000/svg"
+        width="25" height="25" fill="currentColor" class="bi bi-house-add" viewBox="0 0 16 16">
+        <path
+          d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h4a.5.5 0 1 0 0-1h-4a.5.5 0 0 1-.5-.5V7.207l5-5 6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+        <path
+          d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 1 0 1 0v-1h1a.5.5 0 1 0 0-1h-1v-1a.5.5 0 0 0-.5-.5" />
+      </svg><b>Post Property</b></label>
+  </nav>
+  <div class="full">
+    <form action="/updateProperty?id=<%= property._id %>" method="post" id="propertylistingform">
+      <div class="hr"></div>
+      <h2>Basic Information</h2>
+      <div id="basic" class="common">
+        <div>
+          <label>Property Title</label>
+          <input type="text" class="myInput" name="title" value="<%= property.title %>" required>
+        </div>
+        <div>
+          <label>Status</label>
+          <select name="status" class="myInput" id="statusTag">
+            <option value="RENT">Rent</option>
+            <option value="SALE">Sale</option>
+          </select>
+        </div>
+        <div>
+          <label id="priceTag">Price per month (in ₹)</label>
+          <input type="number" class="myInput" name="price" value="<%= property.price %>" required>
+        </div>
+        <div>
+          <label>Area Unit</label>
+          <select name="areaUnit" class="myInput" id="areaTag">
+            <option value="sq.ft">sq.ft</option>
+            <option value="sq.m">sq.m</option>
+            <option value="Bighas">Bighas</option>
+            <option value="Kattha">Kattha</option>
+            <option value="Cents">Cents</option>
+            <option value="Grounds">Grounds</option>
+            <option value="Biswa">Biswa</option>
+          </select>
+        </div>
+        <div>
+          <label>Area <label id="areaVal">(in sq.ft)</label></label>
+          <input type="number" class="myInput" name="area" value="<%= property.area %>" required>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <h2>Location</h2>
+      <div class="location common">
+        <div>
+          <label>Address</label>
+          <input type="text" class="myInput" name="address" value="<%= property.address %>" required>
+        </div>
+        <div>
+          <label>City</label>
+          <input type="text" class="myInput" name="city" value="<%= property.city %>" required>
+        </div>
+        <div>
+          <label>State</label>
+          <input type="text" class="myInput" name="state" value="<%= property.state %>" required>
+        </div>
+        <div style="margin: 0 auto;">
+          <label>Pin Code</label>
+          <input type="text" class="myInput" name="pin" value="<%= property.pincode %>" required>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <h2>Detailed Information</h2>
+      <div class="common" id="detailed">
+        <div>
+          <label>Description</label>
+          <textarea name="description"><%= property.description %></textarea>
+        </div>
+        <% if(property.type !== "PLOT/LAND"){ %>
+        <div class="optional">
+          <label>Bedroom <label class="per">(per floor)</label></label>
+          <input type="text" class="myInput" name="bedroom" value="<%= property.inclusions[0].bedroom %>" required>
+        </div>
+        <div class="optional">
+           <label>Bathroom <label class="per">(per floor)</label></label>
+           <input type="text" class="myInput" name="bathroom" value="<%= property.inclusions[0].bathroom %>" required>
+        </div>
+        <div class="optional">
+           <label>Kitchen <label class="per">(per floor)</label></label>
+           <input type="text" class="myInput" name="kitchen" value="<%= property.inclusions[0].kitchen %>" required>
+        </div>
+        <% if(property.type == "APARTMENT"){ %>
+        <div class="optional">
+           <label>Floors</label>
+           <input type="text" class="myInput" name="floors" value="<%= property.inclusions[0].floors %>" required>
+        </div>
+        <% } %>
+        <% } %>
+      </div>
+      <button class="listit" onclick="submitit()">Submit Property</button>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/javascripts/fix.js"></script>
+  <script src="/javascripts/list.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    let form = document.getElementById("propertylistingform")
+    const submitit = ()=>{
+      form.submit()
+    }
+    document.getElementById("statusTag").value = "<%= property.status %>"
+    document.getElementById("areaTag").value = "<%= property.areaUnit %>"
+  </script>
+</body>
+</html>

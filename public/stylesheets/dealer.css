@@ -1,0 +1,43 @@
+.p-details{
+    height: 52vh;
+    border-bottom: 0.2vw solid gray;
+}
+.tabWrapper{
+    background-color: silver;
+}
+#pop{
+    height: 100%;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 0;
+    padding: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1008;
+  }
+  #popup{
+    width: 18vw;
+    height: 18vw;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+  #popup div{
+    margin: 0;
+  }
+  #numberShwon{
+    margin: auto 0;
+  }
+@media only screen and (max-width: 800px) {
+    .p-details{
+        height: 35vh;
+    }
+}

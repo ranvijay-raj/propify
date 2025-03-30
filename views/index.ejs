@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Propify offers the best property listings, helping you find your dream home quickly and easily.">
+  <link rel="stylesheet" href="/stylesheets/base.css">
+  <link rel="preconnect" href="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js">
+  <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>Propify - Find Your Perfect Property</title>
+</head>
+<body>
+  <nav id="nav" class="flex">
+    <img src="/images/logo.png" alt="logo">
+    <ul class="flex">
+      <li><a class="a" href="/">Home</a></li>
+      <li><a class="a" id="about-btn">About</a></li>
+      <li><a class="a" id="contact-btn">Contact</a></li>
+      <li><a class="a" href="/news" style="color: red;">News</a></li>
+      <button class="a"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+          class="bi bi-person-circle" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+          <path fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+        </svg> Login</button>
+    </ul>
+  </nav>
+  <div class="full">
+    <div class="part1">
+      <div id="parent">
+        <div class="imgContainer">
+          <img
+            src="https://images.unsplash.com/photo-1586859821520-523558cbebe8?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBsb3R8ZW58MHx8MHx8fDA%3D" alt="plot/land">
+        </div>
+        <div class="imgContainer">
+          <img
+            src="https://images.unsplash.com/photo-1571168538867-ad36fe110cc4?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YnVuZ2Fsb3d8ZW58MHx8MHx8fDA%3D" alt="Apatment">
+        </div>
+        <div class="imgContainer">
+          <img
+            src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJ1bmdhbG93fGVufDB8fDB8fHww" alt="Flat">
+        </div>
+      </div>
+      <div id="text-cointainer">
+        <span id="element"></span>
+      </div>
+    </div>
+    <div id="tabs" class="flex">
+      <div class="tab flex active">BUY</div>
+      <div class="tab flex">RENT</div>
+      <div class="tab flex">PLOT / LAND</div>
+    </div>
+    <div id="search" class="flex">
+      <input type="text" placeholder="Search For Properties">
+      <button class="flex"><svg style="border: none; height: 45%; width: 45%; padding: 0; border-radius: 0;"
+          xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+          viewBox="0 0 16 16">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+        </svg></button>
+    </div>
+    <h2>Latest Properties -</h2>
+    <hr>
+    <div class="cardContainer" class="flex">
+      <% if(properties.length > 0){ %>
+        <% properties.forEach((property)=>{ %>
+          <div class="resultedDiv flex border">
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                <% property.media.forEach((media)=>{ %>
+                  <% if(media.includes("jpg") || media.includes("jpeg") || media.includes("png")){ %>
+                    <div class="swiper-slide">
+                    <img src="<%= media %>" alt="property Images" loading="lazy">
+                    </div>
+                  <% }else{ %>
+                    <div class="swiper-slide">
+                    <video controls muted>
+                      <source src="<%= media %>" type="video/mp4">
+                    </video>
+                    </div>
+                  <% } %>
+                <% }) %>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <div class="details flex" onclick="window.location.href=`/property?id=<%= property._id %>`">
+              <div class="flex" style="justify-content: space-between; width: 100%;"><h5 style="margin: 0 auto;" onclick="location.href='/profile/<%= property.owner._id %>'"><%= property.owner.fullName %></h5></div>
+              <h4 style="text-transform: capitalize;"><%= property.title %></h4>
+              <div class="flex prices border">
+                <div class="price flex">
+                  <h4 style="font-weight: 500;">Price</h4>
+                  <% if (property.price > 10000000 || property.price == 10000000) { %>
+                    <h2>₹<%= (property.price / 10000000).toFixed(2) %>cr.</h2>
+                  <% } else if (property.price > 100000 || property.price == 100000) { %>
+                    <h2>₹<%= (property.price / 100000).toFixed(2) %>lac.</h2>
+                  <% } else { %>
+                    <h2>₹<%= property.price %></h2>
+                  <% } %>
+                </div>
+                <div class="price flex">
+                  <h4 style="font-weight: 500;">Area</h4>
+                  <h2><%= (property.area) + (property.areaUnit) %></h2>
+                </div>
+                <% if(property.type !== "PLOT/LAND"){ %>
+                <div class="price flex">
+                  <h4 style="font-weight: 500;">Inclusions</h4>
+                  <h2><i class="fa-solid fa-bed"></i> <%= property.inclusions[0].bedroom %></h2>
+                  <h2><i class="fa-solid fa-kitchen-set"></i> <%= property.inclusions[0].kitchen %></h2>
+                  <h2><i class="fa-solid fa-bath"></i> <%= property.inclusions[0].bathroom %></h2>
+                </div>
+                <% } %>
+              </div>
+              <div class="contacthim flex">
+                <button class="flex border"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                </svg> View Number</button>
+              </div>
+            </div>
+            <img src="/images/featured.png" class="featured" height="38" width="38" alt="featured">
+          </div>
+       <% }) %>
+    <% } %>
+    </div>
+    <h2 style="text-align: center;">Create Account</h2>
+    <hr>
+    <div id="register" class="flex">
+      <% if(login=="false" ){ %>
+        <form action="/register" method="post" class="flex" id="registerForm">
+          <img src="/images/logo.png" alt="logo" loading="lazy">
+          <div id="form-body" class="flex">
+            <input type="text" placeholder="Full Name" class="elm" required name="fullName">
+            <input type="email" placeholder="Email Address" class="elm" required name="username">
+            <div class="pass">
+              <input type="password" placeholder="Password" class="elm" required name="password" style="width: 100%;">
+              <img src="/images/eye-close.png" alt="eye" class="eye" alt="view password">
+            </div>
+            <div class="flex" style="gap: 1vw;">
+            <input type="checkbox" id="checkbox" style="padding: 1vw;" checked>
+            <label style="color: white;">I agree <a style="color: yellow;" href="/info/terms-and-conditions">Terms And Conditions</a></label>
+            </div>
+            <button type="submit" class="elm" id="form-btn">Submit</button>
+            <label onclick="window.location.href = '/?login=true&scroll=true'">Already have an Account ?</label>
+            <% if(err.length > 0){ %>
+              <label style="color: red;">Error: <%= err %></label>
+            <% } %>
+          </div>
+        </form>
+        <% }else{ %>
+          <form action="/login" method="post" class="flex">
+            <img src="/images/logo.png" alt="logo" loading="lazy">
+            <div id="form-body" class="flex">
+              <input type="email" placeholder="Email Address" class="elm" required name="username">
+              <div class="pass">
+                <input type="password" placeholder="Password" class="elm" required name="password" style="width: 100%;">
+                <img src="/images/eye-close.png" alt="eye" class="eye">
+              </div>
+              <button class="elm" id="form-btn">Submit</button>
+              <label onclick="window.location.href = '/'">Don't have an Account ?</label>
+              <% if(err.length > 0){ %>
+                <label style="color: red;">Error: <%= err %></label>
+              <% } %>
+            </div>
+          </form>
+          <% } %>
+    </div>
+    <h2>Contact</h2>
+    <hr>
+    <div id="contact" class="flex">
+      <a href="mailto:mypropify@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+          fill="currentColor" class="bi bi-envelope-open" viewBox="0 0 16 16">
+          <path
+            d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.817l5.75 3.45L8 8.917l1.25.75L15 6.217V5.4a1 1 0 0 0-.53-.882zM15 7.383l-4.778 2.867L15 13.117zm-.035 6.88L8 10.082l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738ZM1 13.116l4.778-2.867L1 7.383v5.734ZM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765z" />
+        </svg> mypropify@gmail.com</a>
+    </div>
+    <h2>About</h2>
+    <hr>
+    <div id="about" class="flex">
+      <strong class="strong">welcome to all Our users!</strong>
+      <br>
+      we are committed to providing you with a seamless and trustworthy real estate experience. Our platform is designed
+      to connect buyers, sellers, and renters, facilitating the exploration of diverse properties and ensuring
+      transparency throughout the process.
+      <br>
+      <br>
+      <h2>Our Mission:</h2>
+      Empowering individuals to make informed real estate decisions, we aim to create a space where dreams of finding
+      the perfect home or investment property come to life. With an extensive range of listings and user-friendly
+      features, we strive to make your real estate journey as smooth as possible.
+      <br>
+      <br>
+      <h2>Trust and Transparency:</h2>
+      We understand the importance of trust in real estate transactions. Our platform prioritizes transparency,
+      providing detailed property information, high-quality images, and direct communication channels between buyers and
+      sellers.
+      <br>
+      <br>
+      <h2>Fraud Awareness:</h2>
+      While we are dedicated to fostering a secure environment, we want to emphasize the need for vigilance. In the rare
+      event that users encounter any suspicious activity or potential fraud, we urge you to exercise caution and report
+      it immediately.
+      <br>
+      <br>
+      <h2>User Responsibility:</h2>
+      It's crucial to note that Propify does not handle or access payments on this platform. Users are
+      responsible for conducting due diligence during transactions. Be wary of any unsolicited requests for payment or
+      personal information and refrain from sharing sensitive details.
+      <br>
+      <br>
+      At Propify, we value your trust and are dedicated to fostering a real estate community built on
+      honesty and reliability. Thank you for choosing us as your partner in finding or selling your property.
+      <br>
+      <br>
+      <strong class="strong">Happy exploring!</strong>
+      <br>
+      <strong class="strong">Propify Team</strong>
+    </div>
+    <footer>
+       <img src="/images/logo.png" alt="logo" loading="lazy">
+       <div class="links">
+        <div>
+          <strong>Contact Us</strong>
+          <a href="mailto:mypropify@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 1vw;" width="28" height="28"
+            fill="currentColor" class="bi bi-envelope-open" viewBox="0 0 16 16">
+            <path
+              d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.817l5.75 3.45L8 8.917l1.25.75L15 6.217V5.4a1 1 0 0 0-.53-.882zM15 7.383l-4.778 2.867L15 13.117zm-.035 6.88L8 10.082l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738ZM1 13.116l4.778-2.867L1 7.383v5.734ZM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765z" />
+          </svg>mypropify@gmail.com</a>
+        </div>
+        <div>
+          <strong>Company</strong>
+          <a href="/info/about">About us</a>
+          <a href="/info/privacy-policy">Privacy Policy</a>
+          <a href="/info/terms-and-conditions">Terms And Conditions</a>
+        </div>
+       </div>
+    </footer>
+    <div class="mobileCopatable">
+      <div class="components flex"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+      </svg> Home</div>
+      <div class="components flex"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+          class="bi bi-search" viewBox="0 0 16 16">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+        </svg> Search</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/javascripts/fix.js"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    var typed = new Typed('#element', {
+      strings: ['BUY Plot', 'SELL Land', 'RENT Flat'],
+      typeSpeed: 103,
+      loop: true
+    });
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+  <script src="/javascripts/animation.js" type="module" defer></script>
+  <script>
+    localStorage.setItem("todo", "BUY")
+    const search_btn = document.querySelector("#search button")
+    const search_box = document.querySelector("#search input")
+    const component = document.querySelectorAll(".components")
+    const searchit = () => {
+      if (search_box.value.trim() !== "") {
+        window.location.href = `/search?q=${search_box.value}&p=${localStorage.getItem("todo").trim()}`
+      } else {
+        window.location.href = `/search?p=${localStorage.getItem("todo").trim()}`
+      }
+    }
+    search_btn.addEventListener("click", searchit)
+    search_box.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        search_btn.click()
+      }
+    })
+    const login_btn = document.querySelector("#nav ul button")
+    login_btn.addEventListener("click", () => {
+      window.location.href = "/?login=true&scroll=true"
+    })
+    component[0].style.color = "royalblue"
+    component[0].addEventListener("click", ()=>{
+      window.location.href = "/"
+    })
+    component[1].addEventListener("click", ()=>{
+      window.location.href = "/search"
+    })
+  </script>
+  <script>
+    let registerForm = document.getElementById("registerForm")
+    let submitButton = document.querySelector("#registerForm button")
+    let checkBox = document.getElementById("checkbox")
+    registerForm.addEventListener("submit", (e)=>{
+      if (!checkBox.checked) {
+        e.preventDefault()
+      }
+      submitButton.disable = true
+    })
+    let eyes = document.getElementsByClassName("eye")[0]
+    eyes.addEventListener("click", ()=>{
+      if(eyes.src.endsWith("/images/eye-close.png")){
+        eyes.src = "/images/eye-open.png"
+        eyes.parentElement.firstElementChild.setAttribute("type", "text")
+      }
+      else{
+        eyes.src = "/images/eye-close.png"
+        eyes.parentElement.firstElementChild.setAttribute("type", "password")
+      }
+    })
+  </script>
+  <% if(scroll=="true"){ %>
+    <script>
+      window.onload = ()=>{
+      const scroll = (elem) => {
+        locoScroll.scrollTo(elem);
+        ScrollTrigger.create({
+          trigger: elem,
+          start: 'top 0%'
+        });
+      }
+      scroll("#register")
+    }
+    </script>
+    <% } %>
+</body>
+</html>

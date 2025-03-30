@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/profileedit.css">
+    <title>Propify - Edit your Profile</title>
+</head>
+<body>
+    <nav>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+      </svg>
+    <label><strong>Personal Information</strong></label>
+    </nav>
+    <div class="e-pic">
+        <div class="pic">
+            <img src="<%= user.dp %>" id="change" onclick="document.getElementById('dp').click()">
+        </div>
+    </div>
+    <form action="/update" method="post" enctype="multipart/form-data">
+        <input type="file" name="dp" id="dp" style="visibility: hidden;">
+        <% if(back == "true"){ %>
+        <label><strong>Full Name</strong></label>
+        <br>
+        <input type="text" name="fullName" value="<%= user.fullName %>">
+        <br>
+        <br>
+        <% }else{ %>
+            <input type="text" name="fullName" hidden>
+        <% } %>
+        <label><strong>Mobile Number (with +91)</strong></label>
+        <br>
+        <% if(back == "true"){ %>
+            <input type="text" name="mobile" value="<%= user.mobile %>" disabled>
+        <% }else{ %>
+            <input type="text" name="mobile">
+        <% } %>
+        <br>
+        <br>
+        <input type="button" value="Save Changes" id="saveChanges">
+        <br>
+        <br>
+        <label style="color: red;" id="note">Note- Mobile Number Provided will be visible to all customers if listing Property</label>
+    </form>
+    <script>
+    if ("<%= back %>" == "true") {
+       let svg = document.querySelector("svg")
+       svg.addEventListener("click", ()=>{
+           window.location.href='/profile'
+       })        
+    }
+    let submitBtn = document.getElementById("saveChanges")
+    let number = document.querySelector("[name='mobile']")
+    let note = document.getElementById("note")
+    let dp = document.getElementById("dp")
+    submitBtn.addEventListener("click", ()=>{
+        if (!(number.value.includes("+91") && number.value.length == 13) && isNaN(number.value.slice(3))) {
+            note.innerHTML = "enter number properly"
+        } else{
+            document.querySelector("body form").submit()
+            submitBtn.disabled = true
+        }
+    })
+dp.addEventListener("change", (event)=>{
+    let change = document.getElementById("change")
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewImage = document.getElementById('previewImage');
+            change.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+})
+    </script>
+</body>
+</html>

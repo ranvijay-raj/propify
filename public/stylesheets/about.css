@@ -1,0 +1,32 @@
+.extra{
+    margin: 1.5vw auto;
+    height: 40vh;
+    width: auto;
+}
+.content{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 10vw;
+    margin-bottom: 2vw;
+}
+.content label{
+    font-weight: normal;
+    font-family: "Montserrat", sans-serif;
+}
+@media only screen and (max-width: 800px){
+    .extra{
+        width: 85%;
+        height: auto;
+    }
+    nav{
+        height: 14vw;
+    }
+    .content{
+        margin-bottom: 10vw;
+        gap: 4vw;
+    }
+}
